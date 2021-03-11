@@ -15,14 +15,19 @@ class Core {
        $url = $this->getUrl();
 
        //Look in controllers for first value and ucwords will capitalize first letter
+    if(isset($url[0])){
 
-       if(file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) 
+        if(file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) 
        {
 
             //will set a new controller
             $this->currentControler = ucwords($url[0]);
             unset($url[0]);
        }
+
+
+    }
+       
 
        //require the controller
 

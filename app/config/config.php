@@ -11,7 +11,7 @@
    define('APPROOT', (dirname(dirname( __FILE__))));
 
    //URLROOT 
-   define('URLROOT', 'localhost/userAppRegisterAndLogin');
+   define('URLROOT', 'http://localhost/userAppRegisterAndLogin');
 
    //Sitename
    define('SITENAME', 'User App');
