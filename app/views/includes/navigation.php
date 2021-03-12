@@ -6,7 +6,7 @@
         <li>
             <a href="<?php echo URLROOT; ?>/users/login">Login</a>
         </li>
-        <li  class="btn-login">
+        <li  id="btn-register">
             <a href="<?php echo URLROOT; ?>/users/register">Register</a>
         </li>
        
