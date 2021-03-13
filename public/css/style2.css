@@ -54,7 +54,7 @@ html, body {
     text-align: center;
     
     margin: 0;
-    top: 40%;
+    top: 20%;
 }
 
 .wrapper-landing h1 {
@@ -104,7 +104,20 @@ html, body {
     
 }
 
-.wrapper-login input{
+.wrapper-login input {
+
+    width: 200px;
+    height: 26px;
+    border: 1px solid #cccccc;
+    background-color: #f5f5f5;
+    font-size: 18px;
+    display: block;
+    position: relative;
+    margin: 20px auto;
+
+}
+
+.wrapper-login select {
 
     width: 200px;
     height: 26px;

@@ -14,11 +14,12 @@
                 'email' => '',
                 'password' => '',
                 'confirmPassword' => '',
-                'type'=> '',
+                'category_id'=> '',
                 'emailError' => '',
                 'usernameError' => '',
                 'passwordError' => '',
-                'confirmPasswordError' => ''
+                'confirmPasswordError' => '',
+                'categoryError' => ''
             ];
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -33,11 +34,12 @@
                     'email' => trim($_POST['email']),
                     'password' => trim($_POST['password']),
                     'confirmPassword' => trim($_POST['confirmPassword']),
-                    'type'=> '',
+                    'category_id'=> $_POST['category'],
                     'emailError' => '',
                     'usernameError' => '',
                     'passwordError' => '',
-                    'confirmPasswordError' => ''
+                    'confirmPasswordError' => '',
+                    'categoryError' => ''
                 ];
 
                
@@ -102,10 +104,17 @@
                         }
                 }
 
+                //validate category selection
+                if(empty($data['category_id']))
+                {
+                    echo 'sto ima vo category:' . $data['category_id'];
+                    $data['categoryError'] = 'Please select a category';
+                }
+
                 //Check that errors are empty
 
                 if (empty($data['usernameError']) && empty($data['emailError']) 
-                    && empty($data['passwordError'] && empty($data['confirmPasswordError'])))
+                    && empty($data['passwordError']) && empty($data['confirmPasswordError']) && empty($data['categoryError']))
                 {
                     //hash password
                     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -130,6 +139,8 @@
         {
             $data = [
                 "title" => "Login Page",
+                'username' => '',
+                'password' => '',
                 "usernameError" => '',
                 "passwordError" => ''
 
@@ -170,6 +181,7 @@
                     }
                     else
                     {
+                        
                         $data['passwordError'] = 'Password or Username is incorrect. Please try again.';
 
                         
@@ -179,16 +191,37 @@
 
 
             }
+            else {
+                $data = [
+                    'username' => '',
+                    'password' => '',
+                    "usernameError" => '',
+                    "passwordError" => ''
+    
+                ];
+            }
 
             $this->view('users/login', $data);
         }
 
         public function createUserSession($user)
         {
-            session_start();
+           
             $_SESSION['id'] = $user->id;
             $_SESSION['username'] = $user->username;
             $_SESSION['email'] = $user->email;
+            header('location:' . URLROOT . '/pages/index');
+        }
+
+        public function logout(){
+            unset($_SESSION['id']);
+            unset($_SESSION['username']);
+            unset($_SESSION['email']);
+            header('location:' . URLROOT . '/users/login');
+        }
+
+        public function getCategories(){
+           echo $this->userModel->categoryTree();
         }
 
     }

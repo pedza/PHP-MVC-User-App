@@ -12,6 +12,7 @@
     <div class="wrapper-login">
         <h2>Register</h2>
 
+
         <form action="<?php echo URLROOT; ?>/users/register" method="POST">
             <input type="text" placeholder="Username *" name="username">
             <span class="invalidFeedback">
@@ -30,7 +31,14 @@
             <span class="invalidFeedback">
                 <?php echo $data['confirmPasswordError']; ?>
             </span>
-            <select name="type" id="type"></select>
+            
+            <select name="category" id="category">
+            <option value='0'>Select a category</option>
+                <?php echo $this->getCategories(); ?>
+            </select>
+            <span class="invalidFeedback">
+                <?php echo $data['categoryError']; ?>
+            </span>
 
             <button id="submit" type="submit" value="submit">Submit</button>
         </form>
